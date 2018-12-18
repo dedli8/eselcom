@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link href="nice-select.css" rel="stylesheet">
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script src="jquery.nice-select.min.js"></script>
+    <title>Document</title>
+    <style>
+        /*sites styles*/
+        .silver-normal {
+            color: #000;
+            fill: #000;
+            text-shadow: none;
+            background: linear-gradient(#fff, #f3f5f4);
+            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.66), inset 0px -2px 0px rgba(0, 0, 0, 0.17);
+            border: none;
+        }
+
+        .btn-main {
+            color: #fff;
+            fill: #fff;
+            text-shadow: 0px 1px 0px #a40000;
+            background: linear-gradient(to top, #ff9000 6%, #ff8700 9%, #ff7e00 18%, #ff9000 100%);
+            box-shadow: 0px 1px 2px rgba(20, 19, 17, 0.8), inset 0px 0px 0px #e75c01;
+        }
+
+        .btn-main:hover {
+            color: #fff;
+            fill: #fff;
+            text-shadow: 0px 1px 0px #a40000;
+            background: linear-gradient(to bottom, #ff7e00 18%, #ff9000 100%);
+            box-shadow: 0px 1px 2px rgba(20, 19, 17, 0.8), inset 0px -2px 2px #e75c01;
+        }
+
+        .btn-buy {
+            color: #fff;
+            fill: #fff;
+            text-shadow: 0px 1px 0px #a40000;
+            background: linear-gradient(to top, #ff9000 6%, #ff8700 9%, #ff7e00 18%, #ff9000 100%);
+            box-shadow: 0px 1px 2px rgba(20, 19, 17, 0.8), inset 0px 0px 0px #e75c01;
+        }
+
+        .buy {
+            height: auto;
+            line-height: 20px;
+            padding-top: 9px;
+            padding-bottom: 9px;
+        }
+
+        .btn-buy:hover {
+            color: #fff;
+            fill: #fff;
+            text-shadow: 0px 1px 0px #a40000;
+            background: linear-gradient(to bottom, #ff7e00 18%, #ff9000 100%);
+            box-shadow: 0px 1px 2px rgba(20, 19, 17, 0.8), inset 0px -2px 2px #e75c01;
+        }
+
+        /*my styles*/
+
+        .my-container {
+            margin: 0 auto;
+            max-width: 1280px;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .my-container button{
+            border: none;
+        }
+
+        .select-wrap {
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .goods-search-area {
+            display: none;
+            border-radius: 5px;
+            outline: none;
+            border: 1px solid #e8e8e8;
+            width: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .goods-search-area textarea {
+            display: block;
+            width: 100%;
+            resize: none;
+            border: none;
+            outline: none;
+            height: 42px;
+            padding: 0 0 0 18px;
+            line-height: 40px;
+        }
+
+        .goods-search-area textarea::placeholder {
+            font-size: 14px;
+            font-family: "Open Sans", sans-serif;
+            color: black;
+        }
+
+        .goods-search-area textarea:-ms-input-placeholder { /* Internet Explorer 10-11 */
+            font-size: 14px;
+            font-family: "Open Sans", sans-serif;
+            color: black;
+        }
+
+        .goods-search-area textarea::-ms-input-placeholder { /* Microsoft Edge */
+            font-size: 14px;
+            font-family: "Open Sans", sans-serif;
+            color: black;
+        }
+
+        .nice-select {
+            margin-bottom: 10px;
+            font-family: 'Open Sans', sans-serif;
+            float: none;
+        }
+
+        .upload-file-wrap {
+            display: none;
+        }
+
+        .custom-file-upload {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: inline-block;
+            vertical-align: middle;
+            padding: 6px 12px;
+            cursor: pointer;
+        }
+
+        .upload-file-name {
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 14px;
+            background-color: white;
+            color: black;
+            height: 42px;
+            width: 87%;
+            border-radius: 5px;
+            border: 1px solid #e8e8e8;
+            text-align: right;
+            padding-right: 10px;
+            line-height: 40px;
+        }
+
+        .btn-search-big {
+            height: 42px;
+            font-weight: bold;
+            font-size: 20px;
+            width: 200px;
+            border-radius: 5px;
+            display: none;
+            margin: 10px auto 0 auto;
+        }
+
+        .search-result-table {
+            width: 100%;
+            border-collapse: collapse;
+            display: none;
+        }
+
+        .search-result-table thead th {
+            width: 12.5%;
+            padding: 5px;
+            border-top: 2px solid #c4c4c4;
+            background: linear-gradient(to bottom, #ffc41e, #ff971e);
+            color: white;
+        }
+
+        .search-result-table thead th:nth-child(2) {
+            width: 32.5%;
+        }
+
+        .search-result-table thead th:first-child {
+            width: 2.5%;
+            border-left: 2px solid #c4c4c4;
+        }
+
+        .search-result-table thead th:last-child {
+            border-right: 2px solid #c4c4c4;
+        }
+
+        .search-result-table tbody td, .search-result-table tbody th {
+            border: 2px solid #c4c4c4;
+            padding: 5px;
+            text-align: center;
+            background: linear-gradient(#fff, #f3f5f4);
+        }
+
+        .btn-add {
+            border-radius: 5px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+
+        .add-to-cart {
+            font-size: 18px;
+            font-weight: bold;
+            display: block;
+            cursor: pointer;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+<div class="my-container">
+    <div class="select-wrap silver-normal">
+        <select id="choose-type" class="nice-select wide">
+            <option data-display="Выберите тип загрузски/поиска"></option>
+            <option value="goods">Список товаров</option>
+            <option value="import">Импорт из CSV/txt</option>
+        </select>
+        <div class="goods-search-area">
+            <textarea placeholder="Введите наименование товара"></textarea>
+        </div>
+        <div class="upload-file-wrap">
+            <div class="upload-file-name"></div>
+            <label for="file-upload" class="custom-file-upload btn-main">Загрузите файл</label>
+            <input id="file-upload" type="file" style="display:none;">
+        </div>
+        <button id="btn-search-big" class="btn-main btn-search-big"> Пошук</button>
+    </div>
+    <table class="search-result-table">
+        <thead>
+        <tr>
+            <th scope="col">Выбрать</th>
+            <th scope="col">Наименование</th>
+            <th scope="col">Артикул</th>
+            <th scope="col">Количество</th>
+            <th scope="col">Цена грн.</th>
+            <th scope="col">Действие</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row"><input type="checkbox"></th>
+            <td>Камера сони</td>
+            <td>111-333</td>
+            <td>2</td>
+            <td>50</td>
+            <td>
+                <button class="btn-main btn-add">+ Добавить</button>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row"><input type="checkbox"></th>
+            <td>Камера сони</td>
+            <td>111-333</td>
+            <td>2</td>
+            <td>50</td>
+            <td>
+                <button class="btn-main btn-add">+ Добавить</button>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row"><input type="checkbox"></th>
+            <td>Камера сони</td>
+            <td>111-333</td>
+            <td>2</td>
+            <td>50</td>
+            <td>
+                <button class="btn-main btn-add">+ Добавить</button>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row"><input type="checkbox"></th>
+            <td>Камера сони</td>
+            <td>111-333</td>
+            <td>2</td>
+            <td>50</td>
+            <td>
+                <button class="btn-main btn-add">+ Добавить</button>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row"><input type="checkbox"></th>
+            <td>Камера сони</td>
+            <td>111-333</td>
+            <td>2</td>
+            <td>50</td>
+            <td>
+                <button class="btn-main btn-add">+ Добавить</button>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                <button type="button" class="btn-buy buy add-to-cart">
+                    Добавить в корзину
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<script>
+    // In your Javascript (external .js resource or <script> tag)
+    $(document).ready(function () {
+        $('.nice-select').niceSelect();
+    });
+    $('#file-upload').change(function () {
+        var i = $(this).prev('label').clone();
+        var file = $('#file-upload')[0].files[0].name;
+        $(this).prevAll('.upload-file-name').text(file);
+    });
+    $("#choose-type").change(function (e) {
+        $("#btn-search-big").hide();
+        $(".goods-search-area").hide();
+        $(".upload-file-wrap").hide();
+        $(".search-result-table").hide();
+        const currentValue = $(this).val();
+        if (currentValue == "goods") {
+            $(".goods-search-area").show();
+            $("#btn-search-big").show();
+        }
+        else if (currentValue == "import") {
+            $(".upload-file-wrap").show();
+            $("#btn-search-big").show();
+        }
+    });
+    $("#btn-search-big").click(function (e) {
+        $(".search-result-table").show();
+    });
+</script>
+</body>
+
+</html>
